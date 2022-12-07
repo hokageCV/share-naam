@@ -1,6 +1,6 @@
 import { createTheme } from '@mui/material/styles';
 
-// https://colorhunt.co/palette/344d676eccafade792f3ecb0
+ 
 // {
 //   primary: color displayed most frequently across your app's screens and components
 //   secondary: provides more ways to accent and distinguish your product
@@ -9,19 +9,20 @@ import { createTheme } from '@mui/material/styles';
 //   testing: for testing purpose
 // }
 
-export const globalTheme = createTheme({
+export const globalTheme1 = createTheme({
+  // https://colorhunt.co/palette/e97777ff9f9ffcddb0fffad7 
   palette: {
     primary: {
-      main: '#344D67',
+      main: '#E97777',
     },
     secondary: {
-      main: '#6ECCAF',
+      main: '#FF9F9F',
     },
     surface: {
-      main: '#ADE792',
+      main: '#FCDDB0',
     },
     background: {
-      main: '#F3ECB0',
+      main: '#FFFAD7',
     },
     testing: {
       main: '#E14D2A',

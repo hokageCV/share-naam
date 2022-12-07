@@ -1,12 +1,12 @@
 import { ThemeProvider} from '@mui/material';
-import {globalTheme2} from './theme/globalTheme';
+import {globalTheme1} from './theme/globalTheme';
 import Navbar from './components/Navbar';
 import Home from "./pages/Home";
 
 function App() {
   
   return (
-    <ThemeProvider theme={globalTheme2} > 
+    <ThemeProvider theme={globalTheme1} > 
       <div className="App">
         <Navbar />
         <Home />

@@ -1,4 +1,3 @@
-// const express = require('express');
 import { Post } from "../models/post.js"
 import mongoose from 'mongoose';
 
@@ -41,7 +40,6 @@ export const updatePost = async (req, res)=>{
         res.status(400).json({error: "post doesn't exist"})
     }
     res.status(200).json(post);
-
 }
 
 export const deletePost = async (req, res)=>{

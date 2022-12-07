@@ -36,6 +36,6 @@ mongoose.connect(process.env.MONGO_URI)
             console.log( `sun raha hu maiiiiiii, port ${PORT} meeee ` );
          })
     })
-    .catch(()=>{
+    .catch((err)=>{
         console.log(err);
     })

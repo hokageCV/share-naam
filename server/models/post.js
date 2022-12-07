@@ -6,6 +6,6 @@ const postSchema = mongoose.Schema({
     city: {type: String, required: true},
     tags: {type: [String], default: []},
     likes: {type: Number, default: 0},
-}, {timeStamps: true });
+}, {timestamps: true });
 
 export const Post = mongoose.model('post', postSchema);

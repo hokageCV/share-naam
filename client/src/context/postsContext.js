@@ -1,5 +1,5 @@
 import {createContext, useReducer} from 'react';
-import {CREATE_POST, DELETE_POST, GET_POSTS} from './contextConstants'
+import {CREATE_POST, DELETE_POST, GET_POSTS, UPDATE_POST} from './contextConstants'
 
 export const PostsContext = createContext();
 
@@ -13,6 +13,13 @@ const postReducer = (state, action) =>{
             return {
                 posts: [action.payload, ...state.posts]
             }
+        case UPDATE_POST:
+            return{
+                posts: state.map((post)=> post._id === action.payload._id ? 
+                    [...state.posts, action.payload ]
+                    : post
+                )
+            }
         case DELETE_POST:
             return {
                 posts: state.posts.filter( (post)=>post._id !== action.payload._id )
@@ -23,10 +30,10 @@ const postReducer = (state, action) =>{
 }
 
 export const PostContextProvider = ({children})=>{
-    const [state, dispatch] = useReducer(postReducer, {posts: null})
+    const [state, dispatch] = useReducer(postReducer, {posts: []})
 
     return (
-        <PostsContext.Provider value={{...state, postsDispatch: dispatch}}> 
+        <PostsContext.Provider value={{ ...state, postsDispatch: dispatch}}> 
             {children}
         </PostsContext.Provider>  
     )
