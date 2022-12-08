@@ -4,9 +4,11 @@ import { usePostsContext } from '../hooks/usePostsContext';
 import { CREATE_POST, UPDATE_POST } from '../context/contextConstants';
 
 const Form = ({currentID, setCurrentID})=>{
-    const [postData, setPostData] = useState({
+    const emptyForm = {
         city: '', title: '', place: '', tags: ''
-    }) 
+    }
+
+    const [postData, setPostData] = useState(emptyForm) 
     const [error, setError] = useState(null);
     const {posts, postsDispatch} = usePostsContext();
     const existingPost = currentID ? posts.find((p)=>p._id === currentID) : null;
@@ -16,6 +18,11 @@ const Form = ({currentID, setCurrentID})=>{
             setPostData(existingPost)
         }
     }, [existingPost])
+
+    const clear = ()=>{
+        setCurrentID('')
+        setPostData(emptyForm)
+    }
 
 
     const handleSubmit = async (e) => {
@@ -33,6 +40,7 @@ const Form = ({currentID, setCurrentID})=>{
                     'Content-Type': 'application/json'
                 }
             })
+            json = await response.json();
         }
         else{
             response = await fetch('/posts', {
@@ -51,15 +59,14 @@ const Form = ({currentID, setCurrentID})=>{
 
         if(currentID){
             setError(null)
-            console.log( "workout updated   ", json );
+            console.log( "post updated   ", json );
             postsDispatch({type: UPDATE_POST, payload: json})
-        }
-        else if(response.ok){
+        } else if(response.ok){
             setError(null)
-            console.log( "new workout added   ", json );
+            console.log( "new post added   ", json );
             postsDispatch({type: CREATE_POST, payload: json})
         }
-
+        clear()
     }
     
     return(
@@ -67,13 +74,12 @@ const Form = ({currentID, setCurrentID})=>{
             <form autoComplete='off' noValidate onSubmit={handleSubmit}>
                 <Typography variant="h6" color="secondary">{(currentID) ? 'Edit ' : 'Share '}</Typography>
 
-                {/* <TextField  name="userName" variant='outlined' label='userName' fullWidth value={postData.userName} onChange={(e)=>setPostData({...postData, userName: e.target.value})} /> */}
                 <TextField  name="title" variant='outlined' label='title' fullWidth value={postData.title} onChange={(e)=>setPostData({...postData, title: e.target.value})} />
                 <TextField  name="place" variant='outlined' label='place' fullWidth value={postData.place} onChange={(e)=>setPostData({...postData, place: e.target.value})} />
                 <TextField  name="city" variant='outlined' label='city' fullWidth value={postData.city} onChange={(e)=>setPostData({...postData, city: e.target.value})} />
                 <TextField  name="tags" variant='outlined' label='tags' fullWidth value={postData.tags} onChange={(e)=>setPostData({...postData, tags: e.target.value})} />
 
-                <button variant='container' color='primary' size='large' type='submit'>Submit</button>
+                <Button variant='container' color='primary' size='large' type='submit'>Submit</Button>
             </form>
         </Paper>
     )

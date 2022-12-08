@@ -28,18 +28,18 @@ export const createPost = async (req, res)=>{
 
 export const updatePost = async (req, res)=>{
     const {id} = req.params;
+    
     if(!mongoose.Types.ObjectId.isValid(id)){
         res.status(404).json({error: "invalid ID hai "})
     }
-
-    const post = await Post.findByIdAndUpdate({_id: id},{
+    
+    const post = await Post.findOneAndUpdate({_id: id},{
         ...req.body
     });
-
     if(!post){
         res.status(400).json({error: "post doesn't exist"})
     }
-    res.status(200).json(post);
+    res.status(200).json({...post, ...req.body});
 }
 
 export const deletePost = async (req, res)=>{
