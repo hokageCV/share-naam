@@ -1,20 +1,13 @@
-// const express = require('express');
-// const mongoose = require('mongoose');
-// const bodyParser = require('body-parser');
-// const cors = require('cors');
-// require('dotenv').config();
 import express from 'express';
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import postsRouter from './routes/postsRoutes.js';
 
 const app = express();
 const PORT = process.env.PORT || 8080;
 dotenv.config();
-
-// const feedRouter = require('./routes/feed');
-import postsRouter from './routes/posts.js';
 
 
 // middleware

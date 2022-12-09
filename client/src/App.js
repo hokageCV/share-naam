@@ -1,6 +1,6 @@
 import { ThemeProvider} from '@mui/material';
 import {globalTheme1} from './theme/globalTheme';
-import Navbar from './components/Navbar';
+import Navbar from './components/Navbar/Navbar';
 import Home from "./pages/Home";
 
 function App() {
