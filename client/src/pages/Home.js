@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import {Grow, Container} from '@mui/material';
-import Posts from '../components/Posts/Posts';
 import {usePostsContext} from '../hooks/usePostsContext'
-import { GET_POSTS } from '../context/contextConstants';
+import { GET_POSTS } from '../Constants/Constants';
+import Posts from '../components/Posts/Posts';
 
 export default function Home(){
     const {posts, postsDispatch} = usePostsContext();

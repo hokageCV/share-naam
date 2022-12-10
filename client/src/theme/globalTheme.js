@@ -1,4 +1,5 @@
 import { createTheme } from '@mui/material/styles';
+import { BACKGROUND, PRIMARY, SECONDARY, SURFACE } from '../Constants/Constants';
 
  
 // {
@@ -9,6 +10,25 @@ import { createTheme } from '@mui/material/styles';
 //   testing: for testing purpose
 // }
 
+export const globalTheme = createTheme({
+  palette: {
+    primary: {
+      main: PRIMARY,
+    },
+    secondary: {
+      main: SECONDARY,
+    },
+    surface: {
+      main: SURFACE,
+    },
+    background: {
+      main: BACKGROUND,
+    },
+    testing: {
+      main: '#E14D2A',
+    },
+  },
+});
 export const globalTheme1 = createTheme({
   // https://colorhunt.co/palette/e97777ff9f9ffcddb0fffad7 
   palette: {
@@ -43,6 +63,27 @@ export const globalTheme2 = createTheme({
     },
     background: {
       main: '#EEEEEE',
+    },
+    testing: {
+      main: '#E14D2A',
+    },
+  },
+});
+
+export const globalTheme3 = createTheme({
+  // https://colorhunt.co/palette/fdeedcffd8a9f1a661e38b29
+  palette: {
+    primary: {
+      main: '#E38B29',
+    },
+    secondary: {
+      main: '#F1A661',
+    },
+    surface: {
+      main: '#FFD8A9',
+    },
+    background: {
+      main: '#FDEEDC',
     },
     testing: {
       main: '#E14D2A',

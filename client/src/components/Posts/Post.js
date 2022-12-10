@@ -1,12 +1,14 @@
 import React from 'react';
-import moment from 'moment'
 import {Card, CardActions, CardContent, Typography, Button, Modal, Box} from '@mui/material';
+import { usePostsContext } from '../../hooks/usePostsContext';
+import { DELETE_POST, LIKE_POST } from '../../Constants/Constants';
+import { BoxStyle, CardActionsStyle, CardStyle, CardContentStyle, EditButtonStyle } from './style';
+import moment from 'moment'
+import UpdatePostForm from '../Form/UpdatePostForm';
+
 import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
-import { usePostsContext } from '../../hooks/usePostsContext';
-import { DELETE_POST } from '../../context/contextConstants';
-import UpdatePostForm from '../Form/UpdatePostForm';
 
 
 const Post = ({post})=>{
@@ -15,17 +17,7 @@ const Post = ({post})=>{
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
-    const style = {
-        position: 'absolute',
-        top: '50%',
-        left: '50%',
-        transform: 'translate(-50%, -50%)',
-        width: 400,
-        bgcolor: 'background',
-        // border: '2px solid #000',
-        // boxShadow: 24,
-        p: 4,
-      };
+    
     
     const handleDelete = async (_id) => {
         const response = await fetch(`/posts/${_id}`, {
@@ -45,51 +37,77 @@ const Post = ({post})=>{
             console.log("post deleted: ", json)
         }
     }
+
+    const handleLike = async (_id)=>{
+        const response = await fetch(`/posts/${_id}/likePost`, {
+            method: 'PATCH',
+                // body: JSON.stringify(post),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+        })
+        const json = await response.json();
+
+        if(!response.ok){
+            console.log(json.error)
+        }
+        else{
+            postsDispatch({type: LIKE_POST, payload: json})
+            console.log("post liked: ", json)
+        }
+    }
+
     return(
-        <Card style={{backgroundColor: "#FFFAD7"}} >
-            <Typography variant="body2">{moment(post.createdAt).fromNow()}</Typography>
+        <Card style={CardStyle} >
             <div>
+                <Typography variant="body2"> &nbsp; {moment(post.createdAt).fromNow()}</Typography>
                 <Button
-                    style={{color:'primary'}}
+                    style={EditButtonStyle}
                     size='small'
                     onClick={()=>handleOpen()}
                 >
-                    <MoreHorizIcon fontSize='default' />
+                    <MoreHorizIcon fontSize='medium' />
                 </Button>
             </div>
+
             <Modal
                 open={open}
                 onClose={handleClose}
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
             >
-                <Box sx={style}>
+                <Box sx={BoxStyle}>
                     <UpdatePostForm 
                         post={post} 
                         handleClose={handleClose}
                     />
                 </Box>
             </Modal>
-            <CardContent>
-                <Typography variant="h4" >{post.title}</Typography>
+
+            <CardContent sx={CardContentStyle}>
+                <Typography variant="h5" >{post.title}</Typography>
                 <Typography variant="h6" >{post.place}</Typography>
-                <Typography variant="body2" >{post.city}</Typography>
+                <Typography variant="body1" >{post.city}</Typography>
                 <div>
-                    <Typography variant="body1" >#{post.tags}</Typography>
+                    <Typography variant="body2" color='textSecondary' component='p'>{post.tags.map((tag)=>`#${tag} `)}</Typography>
                 </div>
             </CardContent>
-            <CardActions>
-                <Button size='small' color='primary' onClick={() => {}}>
-                    <ThumbUpAltIcon fontSize='small' /> Like . {post.likes}
+
+            <CardActions sx={CardActionsStyle} >
+                <Button size='small' color='secondary' onClick={() => {handleLike(post._id)}}>
+                    <ThumbUpAltIcon fontSize='small' /> 
+                    &nbsp; Like &nbsp;
+                    {post.likes}
                 </Button>
                 <Button 
                     size='small' 
-                    color='primary' 
+                    color='secondary' 
                     onClick={()=>{ handleDelete(post._id) }}
                 >
                     <DeleteForeverIcon fontSize='small' /> Delete
                 </Button>
             </CardActions>
+
         </Card>
     )
 }

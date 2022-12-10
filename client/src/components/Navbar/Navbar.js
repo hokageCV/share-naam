@@ -3,21 +3,14 @@ import {AppBar, Box, Toolbar, Typography, Button, IconButton, Modal } from '@mui
 import MenuIcon from '@mui/icons-material/Menu';
 import AddCircleOutlineTwoToneIcon from '@mui/icons-material/AddCircleOutlineTwoTone';
 import CreatePostForm from '../Form/CreatePostForm';
+import { BoxStyle } from './style';
+
 
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-
-  const boxStyle = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 400,
-    p: 4,
-  };
 
   return (
     <Box sx={{ flexGrow: 1 }}>   
@@ -50,7 +43,7 @@ export default function Navbar() {
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
           >
-            <Box sx={boxStyle}>
+            <Box sx={BoxStyle}>
               <CreatePostForm handleClose={handleClose}/>
             </Box>
           </Modal>

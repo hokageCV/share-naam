@@ -1,5 +1,5 @@
 import {createContext, useReducer} from 'react';
-import {CREATE_POST, DELETE_POST, GET_POSTS, UPDATE_POST} from './contextConstants'
+import {CREATE_POST, DELETE_POST, GET_POSTS, UPDATE_POST, LIKE_POST} from '../Constants/Constants';
 
 export const PostsContext = createContext();
 
@@ -23,6 +23,13 @@ const postReducer = (state, action) =>{
         case DELETE_POST:
             return {
                 posts: state.posts.filter( (post)=>post._id !== action.payload._id )
+            }
+        case LIKE_POST:
+            return {
+                posts: state.posts.map((post)=> post._id === action.payload._id ? 
+                     action.payload 
+                    : post
+                )
             }
         default: 
             return state

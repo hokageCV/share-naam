@@ -1,4 +1,4 @@
-import { GET_POSTS } from '../context/contextConstants';
+import { GET_POSTS } from '../Constants/Constants';
 import {usePostsContext} from '../hooks/usePostsContext'
 
 
