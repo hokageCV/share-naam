@@ -1,10 +1,9 @@
 import React, {useState} from 'react';
-import {AppBar, Box, Toolbar, Typography, Button, IconButton, Modal } from '@mui/material'
-import MenuIcon from '@mui/icons-material/Menu';
-import AddCircleOutlineTwoToneIcon from '@mui/icons-material/AddCircleOutlineTwoTone';
+import {AppBar, Box, Toolbar, Typography, Button, Modal, Avatar } from '@mui/material'
+import { AppBarStyle, BrandContainerStyle, FormBoxStyle, HeadingStyle, ToolbarStyle, ProfileStyle } from './style';
 import CreatePostForm from '../Form/CreatePostForm';
-import { BoxStyle } from './style';
 
+import AddCircleOutlineTwoToneIcon from '@mui/icons-material/AddCircleOutlineTwoTone';
 
 
 export default function Navbar() {
@@ -12,44 +11,53 @@ export default function Navbar() {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  return (
-    <Box sx={{ flexGrow: 1 }}>   
-      <AppBar position="static" color="primary">
-        <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }} >
-            foodie feed
-          </Typography>
-          <Button 
-            color="inherit" 
-            variant="outlined"
-            endIcon= {<AddCircleOutlineTwoToneIcon />}
-            sx={{m: 2}}
-            onClick={handleOpen}
-            >
-                Add
-          </Button>
-          <Modal
+  const user =null;
+
+  return ( 
+      <AppBar sx={AppBarStyle}>
+
+        <Modal
             open={open}
             onClose={handleClose}
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
           >
-            <Box sx={BoxStyle}>
+            <Box sx={FormBoxStyle}>
               <CreatePostForm handleClose={handleClose}/>
             </Box>
           </Modal>
-          <Button color="inherit" variant="outlined">Login</Button>
+
+        <div sx={BrandContainerStyle}>
+          <Typography variant="h5" component="div" sx={HeadingStyle} >
+            Share Naam
+          </Typography>
+        </div>
+        
+        <Toolbar sx={ToolbarStyle}>
+          {user ? (
+            <div sx={ProfileStyle}>
+              <Button 
+                color="inherit" 
+                variant="outlined"
+                endIcon= {<AddCircleOutlineTwoToneIcon />}
+                sx={{m: 2, color:'black'}}
+                onClick={handleOpen}
+                >
+                    Add
+              </Button>
+
+              <Avatar alt={user?.result.name} src={user?.result.imageUrl}>{user?.result.name.charAt(0)}</Avatar>
+              <Typography variant="h6">{user?.result.name}</Typography>
+              <Button variant="contained" color="secondary" >Logout</Button>
+            </div>
+
+          ) : (
+            <Button color="inherit" variant="outlined" sx={{color:'black'}}>Login</Button>
+          )}
+          
+          
+          
         </Toolbar>
       </AppBar>
-    </Box>
   );
 }
