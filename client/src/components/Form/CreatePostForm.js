@@ -20,7 +20,7 @@ const CreatePostForm = ({handleClose})=>{
 
 
     const handleSubmit = async (e) => {
-        e.preventDefault();
+        // e.preventDefault();
 
         if(!user){
             console.log("unauthorised")

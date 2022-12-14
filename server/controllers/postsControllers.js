@@ -8,6 +8,7 @@ export const getPosts = async (req, res)=>{
 
 export const createPost = async (req, res)=>{
     const {title, place, city, tags} = req.body;
+    const {creatorID} = req.userID;
 
     let emptyFields = [];
     if(!title) emptyFields.push('title')
@@ -16,9 +17,12 @@ export const createPost = async (req, res)=>{
     if(emptyFields.length > 0){
         return res.status(400).json({error: 'fill all fields', emptyFields})
     }
+    if(!creatorID) {
+        return res.status(400).json({error: 'incorrect authorisation'})
+    }
 
     try{
-        const post = await Post.create({title, place, city, tags}); 
+        const post = await Post.create({title, place, city, tags, creatorID}); 
         res.status(200).json(post)
     }
     catch(err){
