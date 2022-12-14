@@ -2,10 +2,8 @@ import React, {useState} from "react";
 import { Avatar, Button, Paper, Grid, Typography, Container, TextField, IconButton} from "@mui/material";
 import { AvatarStyle, ButtonStyle, FormStyle, PaperStyle } from "./style";
 
-import { useAuthContext } from "../../hooks/useAuthContext";
 import { useSignup } from "../../hooks/useSignup";
 import { useLogin } from "../../hooks/useLogin";
-import { useNavigate } from "react-router-dom";
 
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 
@@ -20,7 +18,6 @@ const initialState = {
 export default function Auth(){
     const [isSignedup, setIsSignedup] = useState(false);
     const [formData, setFormData] = useState(initialState);
-    const navigate = useNavigate();
 
     const { signup, signupError, signupIsLoading } = useSignup();
     const { login, loginError, loginIsLoading } = useLogin();

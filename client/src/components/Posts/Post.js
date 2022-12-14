@@ -6,8 +6,9 @@ import { BoxStyle, CardActionsStyle, CardStyle, CardContentStyle, EditButtonStyl
 import moment from 'moment'
 import UpdatePostForm from '../Form/UpdatePostForm';
 
-import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
-import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+
+import LikePost from './LikePost';
+import DeletePost from './DeletePost';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 
 
@@ -19,43 +20,43 @@ const Post = ({post})=>{
 
     
     
-    const handleDelete = async (_id) => {
-        const response = await fetch(`/posts/${_id}`, {
-            method: 'DELETE',
-                body: JSON.stringify(post),
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-        })
-        const json = await response.json();
+    // const handleDelete = async (_id) => {
+    //     const response = await fetch(`/posts/${_id}`, {
+    //         method: 'DELETE',
+    //             body: JSON.stringify(post),
+    //             headers: {
+    //                 'Content-Type': 'application/json'
+    //             }
+    //     })
+    //     const json = await response.json();
 
-        if(!response.ok){
-            console.log(json.error)
-        }
-        else{
-            postsDispatch({type: DELETE_POST, payload: json})
-            console.log("post deleted: ", json)
-        }
-    }
+    //     if(!response.ok){
+    //         console.log(json.error)
+    //     }
+    //     else{
+    //         postsDispatch({type: DELETE_POST, payload: json})
+    //         console.log("post deleted: ", json)
+    //     }
+    // }
 
-    const handleLike = async (_id)=>{
-        const response = await fetch(`/posts/${_id}/likePost`, {
-            method: 'PATCH',
-                // body: JSON.stringify(post),
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-        })
-        const json = await response.json();
+    // const handleLike = async (_id)=>{
+    //     const response = await fetch(`/posts/${_id}/likePost`, {
+    //         method: 'PATCH',
+    //             // body: JSON.stringify(post),
+    //             headers: {
+    //                 'Content-Type': 'application/json'
+    //             }
+    //     })
+    //     const json = await response.json();
 
-        if(!response.ok){
-            console.log(json.error)
-        }
-        else{
-            postsDispatch({type: LIKE_POST, payload: json})
-            console.log("post liked: ", json)
-        }
-    }
+    //     if(!response.ok){
+    //         console.log(json.error)
+    //     }
+    //     else{
+    //         postsDispatch({type: LIKE_POST, payload: json})
+    //         console.log("post liked: ", json)
+    //     }
+    // }
 
     return(
         <Card style={CardStyle} >
@@ -94,18 +95,8 @@ const Post = ({post})=>{
             </CardContent>
 
             <CardActions sx={CardActionsStyle} >
-                <Button size='small' color='secondary' onClick={() => {handleLike(post._id)}}>
-                    <ThumbUpAltIcon fontSize='small' /> 
-                    &nbsp; Like &nbsp;
-                    {post.likes}
-                </Button>
-                <Button 
-                    size='small' 
-                    color='secondary' 
-                    onClick={()=>{ handleDelete(post._id) }}
-                >
-                    <DeleteForeverIcon fontSize='small' /> Delete
-                </Button>
+                <LikePost post={post} />
+                <DeletePost post={post} />
             </CardActions>
 
         </Card>

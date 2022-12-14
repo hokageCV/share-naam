@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import {Typography, TextField, Paper, Button} from '@mui/material';
 import { usePostsContext } from '../../hooks/usePostsContext';
+import { useAuthContext } from '../../hooks/useAuthContext';
 import { CREATE_POST } from '../../Constants/Constants';
 
 const CreatePostForm = ({handleClose})=>{
+    const { user } = useAuthContext();
     const emptyForm = {
         city: '', title: '', place: '', tags: ''
     }
@@ -20,13 +22,19 @@ const CreatePostForm = ({handleClose})=>{
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        if(!user){
+            console.log("unauthorised")
+            return
+        }
+
         const post = {...formData};
         
         const response = await fetch('/posts', {
             method: 'POST',
             body: JSON.stringify(post),
             headers:{
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization' : `Bearer ${user.token}`
             }
         })
         const json = await response.json();

@@ -1,6 +1,6 @@
 import {useState} from 'react'
 import { AUTH } from '../Constants/Constants'
-import {useAuthContext} from './useAuthContext'
+import { useAuthContext } from './useAuthContext'
 import { useNavigate } from "react-router-dom";
 
 export function useLogin(){
