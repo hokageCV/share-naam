@@ -5,9 +5,10 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Navbar from './components/Navbar/Navbar';
 import Home from "./pages/Home";
 import Auth from './components/Auth/Auth';
+import { useAuthContext } from './hooks/useAuthContext';
 
 function App() {
-  const user = 0;
+  const {user} = useAuthContext();
   
   return (
     <ThemeProvider theme={globalTheme} >
@@ -15,7 +16,10 @@ function App() {
         <div className="App">
           <Navbar />
           <Routes>
-            <Route path='/' 
+            <Route path='/'
+              element={<Navigate to='/posts' />}
+            />
+            <Route path='/posts' 
               element={user ? <Home /> : <Navigate to='/auth' />}
             />
             <Route path='/auth' 

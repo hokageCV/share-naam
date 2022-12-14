@@ -17,3 +17,7 @@ export const FormStyle = {
     width: '100%', 
     marginTop: '3px',
 }
+
+export const ButtonStyle = {
+    margin: '10px 0px',
+}

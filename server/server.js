@@ -3,7 +3,8 @@ import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import dotenv from 'dotenv';
-import postsRouter from './routes/postsRoutes.js';
+import postsRoutes from './routes/postsRoutes.js';
+import userRoutes from './routes/userRoutes.js';
 
 const app = express();
 const PORT = process.env.PORT || 8080;
@@ -19,7 +20,8 @@ app.use(cors());
 app.get('/', (req, res)=>{
     res.redirect( '/posts')
 })
-app.use('/posts', postsRouter)
+app.use('/posts', postsRoutes)
+app.use('/user', userRoutes)
 
 
 // connect to DB

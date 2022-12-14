@@ -28,17 +28,19 @@ export  const HeadingStyle = {
 
 export const ToolbarStyle = {
   display: 'flex',
+  flexDirection: 'row',
   justifyContent: 'flex-end',
-  width: '400px',
+  // width: '400px',
 }
 
 export const BrandContainerStyle = {
-  display: 'flex',
+  // display: 'flex',
   alignItems: 'center',
 }
 
 export const ProfileStyle = {
   display: 'flex',
+  flexDirection: 'row',
   justifyContent: 'space-between',
-  width: '400px',
+  // width: '400px',
 }

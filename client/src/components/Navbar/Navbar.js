@@ -1,17 +1,19 @@
 import React, {useState} from 'react';
-import {AppBar, Box, Toolbar, Typography, Button, Modal, Avatar } from '@mui/material'
+import {AppBar, Box, Toolbar, Typography, Button, Modal, Container } from '@mui/material'
 import { AppBarStyle, BrandContainerStyle, FormBoxStyle, HeadingStyle, ToolbarStyle, ProfileStyle } from './style';
 import CreatePostForm from '../Form/CreatePostForm';
+import { useLogout } from '../../hooks/useLogout';
 
 import AddCircleOutlineTwoToneIcon from '@mui/icons-material/AddCircleOutlineTwoTone';
+import { useAuthContext } from '../../hooks/useAuthContext';
 
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-
-  const user =null;
+  const {logout} = useLogout();   
+  const {user} = useAuthContext()
 
   return ( 
       <AppBar sx={AppBarStyle}>
@@ -25,7 +27,7 @@ export default function Navbar() {
             <Box sx={FormBoxStyle}>
               <CreatePostForm handleClose={handleClose}/>
             </Box>
-          </Modal>
+        </Modal>
 
         <div sx={BrandContainerStyle}>
           <Typography variant="h5" component="div" sx={HeadingStyle} >
@@ -35,7 +37,7 @@ export default function Navbar() {
         
         <Toolbar sx={ToolbarStyle}>
           {user ? (
-            <div sx={ProfileStyle}>
+            <Container sx={ProfileStyle}>
               <Button 
                 color="inherit" 
                 variant="outlined"
@@ -46,17 +48,16 @@ export default function Navbar() {
                     Add
               </Button>
 
-              <Avatar alt={user?.result.name} src={user?.result.imageUrl}>{user?.result.name.charAt(0)}</Avatar>
-              <Typography variant="h6">{user?.result.name}</Typography>
-              <Button variant="contained" color="secondary" >Logout</Button>
-            </div>
+              <Typography variant="h6" color='secondary'>{user.user.name}</Typography>
 
+              <Button variant="contained" color="secondary" onClick={()=>logout()}
+                >Logout
+              </Button>
+            </Container>
           ) : (
-            <Button color="inherit" variant="outlined" sx={{color:'black'}}>Login</Button>
+            <Button 
+              color="inherit" variant="outlined" sx={{color:'black'}}>Login</Button>
           )}
-          
-          
-          
         </Toolbar>
       </AppBar>
   );
