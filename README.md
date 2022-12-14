@@ -2,4 +2,6 @@
 Share your favourite food places
 
 #### upcoming features/changes
-- authentication
+- pagination
+- improve styling
+- validate passwords
