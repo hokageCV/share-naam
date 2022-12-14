@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import { Avatar, Button, Paper, Grid, Typography, Container, TextField, IconButton} from "@mui/material";
+import { Avatar, Button, Paper, Grid, Typography, Container, TextField } from "@mui/material";
 import { AvatarStyle, ButtonStyle, FormStyle, PaperStyle } from "./style";
 
 import { useSignup } from "../../hooks/useSignup";
@@ -11,8 +11,7 @@ const initialState = {
     firstName: '', 
     lastName: '', 
     email: '', 
-    password: '', 
-    confirmPassword: '' 
+    password: '',
 }; 
 
 export default function Auth(){
@@ -90,16 +89,6 @@ export default function Auth(){
                             />
                         </Grid>
 
-                        { !isSignedup &&
-                            <Grid item xs={12}  >
-                                <TextField 
-                                    name="confirmPassword" label="Confirm Password"                           
-                                    onChange={handleChange} type="password" required
-                                    variant='outlined' fullWidth 
-                                />
-                            </Grid>
-                        }
-
                         {/* ======= COMPONENT CODE ======== */}
                         {/* { !isSignedup ? (
                             <>
@@ -110,26 +99,11 @@ export default function Auth(){
                         <FormIn name='email' label="Email" handleChange={handleChange} type="email" />
                         <FormIn name='password' label="Password" handleChange={handleChange} type= "password" />
 
-                        { !isSignedup &&
-                            <FormIn name='confirmPassword' label="Confirm Password" handleChange={handleChange} type="password" />
-                        } */}
+                         */}
 
                         {/* ====== end of COMPONENT CODE ======  */}
 
                     </Grid>
-
-                    {/* <GoogleLogin
-                        clientId="365066108409-r5get3oqqenmlr3j2hcs53e2rvpqr501.apps.googleusercontent.com"
-                        render={(renderProps)=>(
-                            <Button sx={{my:2}} color='primary' fullWidth onClick={renderProps.onClick} disabled={renderProps.disabled} startIcon={<Icon />} variant="contained" >
-                                Google Log In
-                            </Button>
-                        )}
-
-                        onSuccess={googleSuccess}
-                        onFailure={googleFailure} 
-                        cookiePolicy="single_host_origin"
-                    /> */}
 
                     <Button type='submit' variant="contained" color="primary" fullWidth sx={ButtonStyle}>
                         {isSignedup ? "Login" : "Signup"}

@@ -1,7 +1,5 @@
 import React from 'react';
 import {Card, CardActions, CardContent, Typography, Button, Modal, Box} from '@mui/material';
-import { usePostsContext } from '../../hooks/usePostsContext';
-import { DELETE_POST, LIKE_POST } from '../../Constants/Constants';
 import { BoxStyle, CardActionsStyle, CardStyle, CardContentStyle, EditButtonStyle } from './style';
 import moment from 'moment'
 import UpdatePostForm from '../Form/UpdatePostForm';
@@ -10,65 +8,30 @@ import UpdatePostForm from '../Form/UpdatePostForm';
 import LikePost from './LikePost';
 import DeletePost from './DeletePost';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
+import { useAuthContext } from '../../hooks/useAuthContext';
 
 
 const Post = ({post})=>{
-    const {postsDispatch} = usePostsContext();
+    const {user} = useAuthContext()
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
-    
-    
-    // const handleDelete = async (_id) => {
-    //     const response = await fetch(`/posts/${_id}`, {
-    //         method: 'DELETE',
-    //             body: JSON.stringify(post),
-    //             headers: {
-    //                 'Content-Type': 'application/json'
-    //             }
-    //     })
-    //     const json = await response.json();
-
-    //     if(!response.ok){
-    //         console.log(json.error)
-    //     }
-    //     else{
-    //         postsDispatch({type: DELETE_POST, payload: json})
-    //         console.log("post deleted: ", json)
-    //     }
-    // }
-
-    // const handleLike = async (_id)=>{
-    //     const response = await fetch(`/posts/${_id}/likePost`, {
-    //         method: 'PATCH',
-    //             // body: JSON.stringify(post),
-    //             headers: {
-    //                 'Content-Type': 'application/json'
-    //             }
-    //     })
-    //     const json = await response.json();
-
-    //     if(!response.ok){
-    //         console.log(json.error)
-    //     }
-    //     else{
-    //         postsDispatch({type: LIKE_POST, payload: json})
-    //         console.log("post liked: ", json)
-    //     }
-    // }
-
     return(
         <Card style={CardStyle} >
             <div>
-                <Typography variant="body2"> &nbsp; {moment(post.createdAt).fromNow()}</Typography>
-                <Button
-                    style={EditButtonStyle}
-                    size='small'
-                    onClick={()=>handleOpen()}
-                >
-                    <MoreHorizIcon fontSize='medium' />
-                </Button>
+                <Typography variant="body2">
+                     &nbsp; {moment(post.createdAt).fromNow()}
+                </Typography>
+                {user.user._id === post.creatorID &&
+                    <Button
+                        style={EditButtonStyle}
+                        size='small'
+                        onClick={()=>handleOpen()}
+                        >
+                        <MoreHorizIcon fontSize='medium' />
+                    </Button>
+                }
             </div>
 
             <Modal
@@ -96,7 +59,9 @@ const Post = ({post})=>{
 
             <CardActions sx={CardActionsStyle} >
                 <LikePost post={post} />
-                <DeletePost post={post} />
+                {user.user._id === post.creatorID &&
+                    <DeletePost post={post} />
+                }
             </CardActions>
 
         </Card>
