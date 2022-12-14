@@ -6,6 +6,7 @@ import { CREATE_POST } from '../../Constants/Constants';
 
 const CreatePostForm = ({handleClose})=>{
     const { user } = useAuthContext();
+    const creatorID = user.user._id ;
     const emptyForm = {
         city: '', title: '', place: '', tags: ''
     }
@@ -20,14 +21,14 @@ const CreatePostForm = ({handleClose})=>{
 
 
     const handleSubmit = async (e) => {
-        // e.preventDefault();
+        e.preventDefault();
 
         if(!user){
             console.log("unauthorised")
             return
         }
 
-        const post = {...formData};
+        const post = {...formData, creatorID};
         
         const response = await fetch('/posts', {
             method: 'POST',
