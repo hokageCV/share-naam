@@ -5,10 +5,10 @@ Get to know about your friends' favourite places.
 ---
 ### Made with
 - ReactJS
-- materialUI
+- MaterialUI
 - NodeJS
 - MongoDB
-- expressJS
+- ExpressJS
 
 <br>
 
