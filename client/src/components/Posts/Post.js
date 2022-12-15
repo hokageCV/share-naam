@@ -20,7 +20,7 @@ const Post = ({post})=>{
     return(
         <Card style={CardStyle} >
             <div>
-                <Typography variant="body2">
+                <Typography variant="caption">
                      &nbsp; {moment(post.createdAt).fromNow()}
                 </Typography>
                 {user.user._id === post.creatorID &&
@@ -49,11 +49,19 @@ const Post = ({post})=>{
             </Modal>
 
             <CardContent sx={CardContentStyle}>
-                <Typography variant="h5" >{post.title}</Typography>
-                <Typography variant="h6" >{post.place}</Typography>
-                <Typography variant="body1" >{post.city}</Typography>
+                <Typography variant="h5" sx={{textTransform: 'capitalize'}}>
+                    {post.title}
+                </Typography>
+                <Typography variant="subtitle2" sx={{textTransform: 'capitalize'}} >
+                    {post.place}
+                </Typography>
+                <Typography variant="body2" sx={{textTransform: 'capitalize'}} >
+                    {post.city}
+                </Typography>
                 <div>
-                    <Typography variant="body2" color='textSecondary' component='p'>{post.tags.map((tag)=>`#${tag} `)}</Typography>
+                    <Typography variant="caption" color='textSecondary' >
+                        {post.tags.map((tag)=>`#${tag} `)}
+                    </Typography>
                 </div>
             </CardContent>
 

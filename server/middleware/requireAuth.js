@@ -12,7 +12,7 @@ export const requireAuth = async (req, res, next) => {
 
     try{
         const decodedData = jwt.verify(token, process.env.SECRET_STRING);
-        req.userID = decodedData?._id ;
+        req.userID = decodedData._id ;
 
         next()
     }

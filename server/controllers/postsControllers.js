@@ -58,6 +58,7 @@ export const deletePost = async (req, res)=>{
 }
 
 export const likePost = async (req, res)=>{
+    // post ID
     const {id} = req.params;
 
     if(!req.userID){
@@ -70,9 +71,10 @@ export const likePost = async (req, res)=>{
 
     const post = await Post.findById(id);
 
-    const index = post.likes.findIndex((id)=> id === String(req.userID));
-    if(index == -1){
-        post.likes.push(req.userId);
+    const index = post.likes.findIndex((userID)=> userID === String(req.userID));
+
+    if(index === -1){
+        post.likes.push(req.userID);
     }
     else{
         post.likes = post.likes.filter((id)=> id !== String(req.userID));

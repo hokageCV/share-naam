@@ -31,7 +31,6 @@ export default function LikePost({post}){
         }
         else{
             postsDispatch({type: LIKE_POST, payload: json})
-            console.log("post liked: ", json)
         }
     }
 
@@ -40,7 +39,7 @@ export default function LikePost({post}){
             color='secondary' 
             onClick={() => {handleLike(post._id)}}
         >
-            { post.likes.find( (like)=> like === user.user._id) ?
+            { (post.likes.find( (like)=> like === user.user._id)) ?
                 <><ThumbUpAltIcon fontSize='small'/> &nbsp; Liked &nbsp; {post.likes.length}</>
             :
                 <><ThumbUpAltOutlinedIcon fontSize='small' /> &nbsp; Like &nbsp; {post.likes.length}</>

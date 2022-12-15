@@ -18,7 +18,12 @@ export const AppBarStyle = {
   justifyContent: 'space-between',
   alignItems: 'center',
   padding: '10px 50px',
-  position: 'static'
+  position: 'static',
+
+  "@media(max-width:800px)":{
+    display: 'flex',
+    flexDirection: 'column',
+  }
 }
 
 export  const HeadingStyle = {

@@ -39,20 +39,22 @@ export default function Navbar() {
           {user ? (
             <Container sx={ProfileStyle}>
               <Button 
-                color="inherit" 
+                color="secondary" 
                 variant="outlined"
                 endIcon= {<AddCircleOutlineTwoToneIcon />}
-                sx={{m: 2, color:'black'}}
+                sx={{m: 2}}
                 onClick={handleOpen}
                 >
                     Add
               </Button>
 
-              <Typography variant="h6" color='secondary'>{user.user.name}</Typography>
+              <Typography variant="h6" color='secondary' sx={{textTransform: 'capitalize'}}>
+                {user.user.name}
+              </Typography>
 
               <Button 
-                variant="contained" 
                 color="secondary" 
+                variant="outlined" 
                 sx={LogoutBtnStyle}
                 onClick={()=>logout()}
                 >Logout

@@ -11,7 +11,6 @@ export const BoxStyle = {
 
 export const CardStyle = {
   backgroundColor: CARD_BG,
-  // backgroundColor: '#fcb43a',
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'space-between',

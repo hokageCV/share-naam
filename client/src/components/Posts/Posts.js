@@ -9,10 +9,10 @@ const Posts = ({posts})=>{
         <>
             { (!maap) ? <CircularProgress /> : 
             (
-                <Grid container alignItems='stretch' spacing={3}>
+                <Grid container alignItems='center' spacing={3}>
                     {posts.map( (post)=>{
                         return (
-                            <Grid item key={post._id} xs={12} sm={5} lg={4}>
+                            <Grid item key={post._id} xs={10} sm={5} md={4} lg={3} >
                                 <Post post={post} />
                             </Grid>
                         )
