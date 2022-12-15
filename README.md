@@ -12,13 +12,6 @@ Get to know about your friends' favourite places.
 
 <br>
 
-### Backend
-<img src="./client/public/images/backend.png" alt="backend" width="1000"/>
-
-
-### Frontend
-<img src="./client/public/images/frontend.png" alt="frontend" width="1000"/>
-
 ---
 #### upcoming features/changes
 - pagination
