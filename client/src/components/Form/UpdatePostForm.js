@@ -3,7 +3,7 @@ import {Typography, TextField, Paper, Button} from '@mui/material';
 import { usePostsContext } from '../../hooks/usePostsContext';
 import { useAuthContext } from '../../hooks/useAuthContext';
 
-import { UPDATE_POST } from '../../Constants/Constants';
+import { SURFACE, UPDATE_POST } from '../../Constants/Constants';
 
 const UpdatePostForm = ({post, handleClose})=>{
     const { user } = useAuthContext();
@@ -58,9 +58,9 @@ const UpdatePostForm = ({post, handleClose})=>{
     }
     
     return(
-        <Paper style={{backgroundColor: "#FFFAD7"}}>
+        <Paper style={{backgroundColor: SURFACE}}>
             <form autoComplete='off' noValidate onSubmit={handleSubmit}>
-                <Typography variant="h6" color="secondary">Edit</Typography>
+                <Typography variant="h6" color="secondary"> &nbsp; Edit</Typography>
 
                 <TextField  name="title" variant='outlined' label='title' fullWidth value={formData.title} onChange={(e)=>setFormData({...formData, title: e.target.value})} />
                 <TextField  name="place" variant='outlined' label='place' fullWidth value={formData.place} onChange={(e)=>setFormData({...formData, place: e.target.value})} />

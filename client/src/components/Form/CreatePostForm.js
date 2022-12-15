@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import {Typography, TextField, Paper, Button} from '@mui/material';
 import { usePostsContext } from '../../hooks/usePostsContext';
 import { useAuthContext } from '../../hooks/useAuthContext';
-import { CREATE_POST } from '../../Constants/Constants';
+import { CREATE_POST, SURFACE } from '../../Constants/Constants';
 
 const CreatePostForm = ({handleClose})=>{
     const { user } = useAuthContext();
@@ -55,9 +55,9 @@ const CreatePostForm = ({handleClose})=>{
     }
     
     return(
-        <Paper style={{backgroundColor: "#FFFAD7"}}>
-            <form autoComplete='off' noValidate onSubmit={handleSubmit}>
-                <Typography variant="h6" color="secondary">Share</Typography>
+        <Paper style={{backgroundColor: SURFACE}}>
+            <form autoComplete='off' noValidate onSubmit={handleSubmit} sx={{px:'5px'}}>
+                <Typography variant="h6" color="secondary"> &nbsp; Share</Typography>
 
                 <TextField  name="title" variant='outlined' label='title' fullWidth value={formData.title} onChange={(e)=>setFormData({...formData, title: e.target.value})} />
                 <TextField  name="place" variant='outlined' label='place' fullWidth value={formData.place} onChange={(e)=>setFormData({...formData, place: e.target.value})} />

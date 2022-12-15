@@ -12,5 +12,6 @@ export const LOGOUT = 'LOGOUT';
 // Theme colors
 export const PRIMARY = '#Ffc72c'
 export const SECONDARY = '#181200'
-export const SURFACE = '#aea17d'
+export const SURFACE = '#ffeebb'
 export const BACKGROUND = '#ffd767'
+export const CARD_BG = '#fdb638'

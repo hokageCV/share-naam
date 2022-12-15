@@ -7,7 +7,7 @@ export const FormBoxStyle = {
   transform: 'translate(-50%, -50%)',
   width: 400,
   bgcolor: 'background',
-  border: '5px solid red',
+  border: '5px solid black',
   m:4
 }
 
@@ -42,5 +42,11 @@ export const ProfileStyle = {
   display: 'flex',
   flexDirection: 'row',
   justifyContent: 'space-between',
+  alignItems: 'center'
   // width: '400px',
+}
+
+export const LogoutBtnStyle = {
+  height: '50px',
+  margin: '10px'
 }

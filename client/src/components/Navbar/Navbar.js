@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {AppBar, Box, Toolbar, Typography, Button, Modal, Container } from '@mui/material'
-import { AppBarStyle, BrandContainerStyle, FormBoxStyle, HeadingStyle, ToolbarStyle, ProfileStyle } from './style';
+import { AppBarStyle, BrandContainerStyle, FormBoxStyle, HeadingStyle, ToolbarStyle, ProfileStyle, LogoutBtnStyle } from './style';
 import CreatePostForm from '../Form/CreatePostForm';
 import { useLogout } from '../../hooks/useLogout';
 
@@ -50,7 +50,11 @@ export default function Navbar() {
 
               <Typography variant="h6" color='secondary'>{user.user.name}</Typography>
 
-              <Button variant="contained" color="secondary" onClick={()=>logout()}
+              <Button 
+                variant="contained" 
+                color="secondary" 
+                sx={LogoutBtnStyle}
+                onClick={()=>logout()}
                 >Logout
               </Button>
             </Container>

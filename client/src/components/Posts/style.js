@@ -1,4 +1,4 @@
-import { SURFACE, SECONDARY } from "../../Constants/Constants"
+import { SECONDARY, CARD_BG } from "../../Constants/Constants"
 export const BoxStyle = {
   position: 'absolute',
   top: '50%',
@@ -6,11 +6,12 @@ export const BoxStyle = {
   transform: 'translate(-50%, -50%)',
   width: 400,
   bgcolor: 'background',
-  border: '5px solid red',
+  border: '5px solid black',
 }
 
 export const CardStyle = {
-  backgroundColor: SURFACE,
+  backgroundColor: CARD_BG,
+  // backgroundColor: '#fcb43a',
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'space-between',

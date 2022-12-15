@@ -1,11 +1,12 @@
-import { SECONDARY } from "../../Constants/Constants"
+import { SECONDARY, SURFACE } from "../../Constants/Constants"
 
 export const PaperStyle =  {
-marginTop: '8px',
-display: 'flex',
-flexDirection: 'column',
-alignItems: 'center',
-padding: '2px',
+    marginTop: '8px',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    padding: '2px',
+    backgroundColor: SURFACE
 }
 
 export const AvatarStyle = {
