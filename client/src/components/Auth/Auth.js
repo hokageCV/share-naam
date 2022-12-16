@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import { Avatar, Button, Paper, Grid, Typography, Container, TextField } from "@mui/material";
-import { AvatarStyle, ButtonStyle, FormStyle, PaperStyle } from "./style";
+import { AvatarStyle, ButtonStyle, FormStyle, PaperStyle, ErrorStyle } from "./style";
 
 import { useSignup } from "../../hooks/useSignup";
 import { useLogin } from "../../hooks/useLogin";
@@ -18,8 +18,8 @@ export default function Auth(){
     const [isSignedup, setIsSignedup] = useState(false);
     const [formData, setFormData] = useState(initialState);
 
-    const { signup, signupError, signupIsLoading } = useSignup();
-    const { login, loginError, loginIsLoading } = useLogin();
+    const { signup, signupError, setSignupError, signupIsLoading } = useSignup();
+    const { login, loginError, setLoginError, loginIsLoading } = useLogin();
 
     const handleSubmit = async (e) =>{
         e.preventDefault()
@@ -38,7 +38,11 @@ export default function Auth(){
         setFormData({...formData, [e.target.name]: e.target.value })
     }
 
-    const toggleIsSignedup = () => setIsSignedup((prev)=> !prev)
+    const toggleIsSignedup = () => {
+        setIsSignedup((prev)=> !prev)
+        setSignupError(null)
+        setLoginError(null)
+    }
 
     return(
         <Container  maxWidth="xs">
@@ -58,14 +62,14 @@ export default function Auth(){
                             <>
                                 <Grid item xs={12} sm={6} >
                                     <TextField 
-                                        name="firstName" label="First Name"                           
+                                        name="firstName" label="First Name"
                                         onChange={handleChange} type="text"
                                         variant='outlined' fullWidth required autoFocus 
                                     />
                                 </Grid>
                                 <Grid item xs={12} sm={6} >
                                     <TextField 
-                                        name="lastName" label="Last Name"                           
+                                        name="lastName" label="Last Name"    
                                         onChange={handleChange} type="text" required 
                                         variant='outlined' fullWidth 
                                     />
@@ -76,14 +80,14 @@ export default function Auth(){
                         <Grid item xs={12}  >
                             <TextField 
                                 name="email" label="Email"                           
-                                onChange={handleChange} type="email" required
+                                onChange={handleChange} type="email"
                                 variant='outlined' fullWidth 
                             />
                         </Grid>
                         <Grid item xs={12}  >
                             <TextField 
                                 name="password" label="Password"                           
-                                onChange={handleChange} required 
+                                onChange={handleChange} 
                                 variant='outlined' fullWidth 
                                 type= "password"                              
                             />
@@ -104,10 +108,16 @@ export default function Auth(){
                         {/* ====== end of COMPONENT CODE ======  */}
 
                     </Grid>
+                    <Container sx={ErrorStyle}>
+                        {signupError && <div>{signupError}</div>}
+                        {loginError && <div>{loginError}</div>}
+                    </Container>
 
                     <Button type='submit' variant="contained" color="primary" fullWidth sx={ButtonStyle}>
                         {isSignedup ? "Login" : "Signup"}
                     </Button>
+
+
                     <Grid container justify='flex-end'>
                         <Grid item>
                             <Button onClick={toggleIsSignedup} >

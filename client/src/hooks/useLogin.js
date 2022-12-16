@@ -36,5 +36,5 @@ export function useLogin(){
             navigate('/posts', {replace: true})
         }
     }
-    return {login, loginError, loginIsLoading}
+    return {login, loginError, setLoginError, loginIsLoading}
 }

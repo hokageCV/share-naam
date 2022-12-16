@@ -1,4 +1,4 @@
-import { SECONDARY, SURFACE } from "../../Constants/Constants"
+import { SECONDARY, SURFACE, ERROR_RED } from "../../Constants/Constants"
 
 export const PaperStyle =  {
     marginTop: '8px',
@@ -21,4 +21,12 @@ export const FormStyle = {
 
 export const ButtonStyle = {
     margin: '10px 0px',
+}
+
+export const ErrorStyle = {
+    padding: '10px',
+    color: ERROR_RED,
+    borderRadius: '4px',
+    margin: '20px 0',
+    fontSize: 'x-small'
 }

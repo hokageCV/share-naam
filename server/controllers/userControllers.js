@@ -1,5 +1,6 @@
 import jwt  from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
+import validator from 'validator';
 import { UserModel } from '../models/userModel.js';
 
 const createToken = (_id, email)=>{
@@ -10,11 +11,25 @@ export const signup = async (req, res) => {
     const {firstName, lastName, email, password} = req.body;
 
     try{
+        if(!email || !password){
+            throw Error("all fields must be filled")
+        }
+
+        if(!validator.isEmail(email)){ 
+            throw Error("valid email nahi hai ")
+        }
+
         const emailExists = await UserModel.findOne({email});
         if(emailExists){
             return res.status(400).json({ message: "email already in use" });
         }
 
+        // validate password
+        if(!validator.isStrongPassword(password)){ 
+            throw Error("password is not strong")
+        }
+
+        // encrypt password
         const salt = await bcrypt.genSalt(10);
         const hash = await bcrypt.hash(password, salt);
         const user = await UserModel.create({email, password: hash, name:`${firstName} ${lastName}`});

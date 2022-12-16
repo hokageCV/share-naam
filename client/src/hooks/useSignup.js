@@ -36,5 +36,5 @@ export function useSignup(){
             navigate('/posts', {replace: true})
         }
     }
-    return {signup, signupError, signupIsLoading}
+    return {signup, signupError, setSignupError, signupIsLoading}
 }
