@@ -17,6 +17,7 @@ export const CardStyle = {
   borderRadius: '15px',
   height: '100%',
   position: 'relative',
+  boxShadow: "5px 6px 4px #b58500"
 }
 
 export const CardContentStyle ={
