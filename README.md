@@ -16,4 +16,3 @@ Get to know about your friends' favourite places.
 #### upcoming features/changes
 - pagination
 - improve styling
-- validate passwords

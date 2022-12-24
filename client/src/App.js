@@ -8,7 +8,7 @@ import Auth from './components/Auth/Auth';
 import { useAuthContext } from './hooks/useAuthContext';
 
 function App() {
-  const {user} = useAuthContext();
+  // const {user} = useAuthContext();
   
   return (
     <ThemeProvider theme={globalTheme} >
@@ -20,11 +20,17 @@ function App() {
               element={<Navigate to='/posts' />}
             />
             <Route path='/posts' 
+              element={<Home />}
+            />
+            <Route path='/auth' 
+              element={<Auth /> }  
+            />
+            {/* <Route path='/posts' 
               element={user ? <Home /> : <Navigate to='/auth' />}
             />
             <Route path='/auth' 
               element={!user ? <Auth /> : <Navigate to='/' />}  
-            />
+            /> */}
           </Routes>
         </div>
       </BrowserRouter> 

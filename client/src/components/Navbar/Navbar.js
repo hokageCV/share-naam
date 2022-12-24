@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {AppBar, Box, Toolbar, Typography, Button, Modal, Container } from '@mui/material'
 import { AppBarStyle, BrandContainerStyle, FormBoxStyle, HeadingStyle, ToolbarStyle, ProfileStyle, LogoutBtnStyle } from './style';
+import { useNavigate } from "react-router-dom";
 import CreatePostForm from '../Form/CreatePostForm';
 import { useLogout } from '../../hooks/useLogout';
 
@@ -12,6 +13,8 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  const navigate = useNavigate();
   const {logout} = useLogout();   
   const {user} = useAuthContext()
 
@@ -62,7 +65,12 @@ export default function Navbar() {
             </Container>
           ) : (
             <Button 
-              color="inherit" variant="outlined" sx={{color:'black'}}>Login</Button>
+              color="inherit" variant="outlined" 
+              sx={{color:'black'}}
+              onClick={()=>navigate('/auth', {replace: true})}
+            >
+                Login
+              </Button>
           )}
         </Toolbar>
       </AppBar>
