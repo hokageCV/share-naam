@@ -12,10 +12,11 @@ import { useAuthContext } from '../../hooks/useAuthContext';
 
 
 const Post = ({post})=>{
-    const {user} = useAuthContext()
+    const {user} = useAuthContext() 
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+
 
     return(
         <Card style={CardStyle} >
@@ -23,7 +24,7 @@ const Post = ({post})=>{
                 <Typography variant="caption">
                      &nbsp; {moment(post.createdAt).fromNow()}
                 </Typography>
-                {user.user._id === post.creatorID &&
+                {(user!==null && user!==undefined && user.user._id === post.creatorID) ?
                     <Button
                         style={EditButtonStyle}
                         size='small'
@@ -31,6 +32,7 @@ const Post = ({post})=>{
                         >
                         <MoreHorizIcon fontSize='medium' />
                     </Button>
+                    : null
                 }
             </div>
 
@@ -66,9 +68,10 @@ const Post = ({post})=>{
             </CardContent>
 
             <CardActions sx={CardActionsStyle} >
-                <LikePost post={post} />
-                {user.user._id === post.creatorID &&
+                {user!==null && user!==undefined && <LikePost post={post} />}
+                {(user!==null && user!==undefined &&   user.user._id === post.creatorID) ?
                     <DeletePost post={post} />
+                    : null
                 }
             </CardActions>
 
