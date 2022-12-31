@@ -16,7 +16,7 @@ export default function Navbar() {
 
   const navigate = useNavigate();
   const {logout} = useLogout();   
-  const {user} = useAuthContext()
+  const {userContext} = useAuthContext()
 
   return ( 
       <AppBar sx={AppBarStyle}>
@@ -39,7 +39,7 @@ export default function Navbar() {
         </div>
         
         <Toolbar sx={ToolbarStyle}>
-          {user ? (
+          {userContext ? (
             <Container sx={ProfileStyle}>
               <Button 
                 color="secondary" 
@@ -52,7 +52,7 @@ export default function Navbar() {
               </Button>
 
               <Typography variant="h6" color='secondary' sx={{textTransform: 'capitalize'}}>
-                {user.user.name}
+                {userContext.user.name}
               </Typography>
 
               <Button 

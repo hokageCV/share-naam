@@ -8,11 +8,11 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
 export default function DeletePost({post}){
     const { postsDispatch } = usePostsContext();
-    const { user } = useAuthContext();
+    const { userContext } = useAuthContext();
 
     const handleDelete = async (_id) => {
 
-        if(!user){
+        if(!userContext){
             console.log("unauthorised")
             return
         }
@@ -22,7 +22,7 @@ export default function DeletePost({post}){
                 body: JSON.stringify(post),
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization' : `Bearer ${user.token}`
+                    'Authorization' : `Bearer ${userContext.token}`
                 }
         })
         const json = await response.json();

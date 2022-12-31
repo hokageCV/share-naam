@@ -32,7 +32,6 @@ export function useSignup(){
             authDispatch({type: AUTH, payload: json})
 
             setSignupIsLoading(false)
-            console.log("signed up   ", json)
             navigate('/posts', {replace: true})
         }
     }

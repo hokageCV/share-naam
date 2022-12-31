@@ -15,8 +15,9 @@ const initialState = {
 }; 
 
 export default function Auth(){
-    const [isSignedup, setIsSignedup] = useState(false);
-    const [formData, setFormData] = useState(initialState);
+    const [ isSignedup, setIsSignedup ] = useState(false);
+    const [ formData, setFormData ] = useState(initialState);
+    const [ error, setError ] = useState(null);
 
     const { signup, signupError, setSignupError, signupIsLoading } = useSignup();
     const { login, loginError, setLoginError, loginIsLoading } = useLogin();
@@ -111,6 +112,7 @@ export default function Auth(){
                     <Container sx={ErrorStyle}>
                         {signupError && <div>{signupError}</div>}
                         {loginError && <div>{loginError}</div>}
+                        {error && <div>{error}</div>}
                     </Container>
 
                     <Button type='submit' variant="contained" color="primary" fullWidth sx={ButtonStyle}>
