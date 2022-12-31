@@ -32,7 +32,6 @@ export function useLogin(){
             authDispatch({type: AUTH, payload: json})
 
             setLoginIsLoading(false)
-            console.log("logged in   ", json)
             navigate('/posts', {replace: true})
         }
     }

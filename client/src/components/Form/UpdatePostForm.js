@@ -6,7 +6,7 @@ import { useAuthContext } from '../../hooks/useAuthContext';
 import { SURFACE, UPDATE_POST } from '../../Constants/Constants';
 
 const UpdatePostForm = ({post, handleClose})=>{
-    const { user } = useAuthContext();
+    const { userContext } = useAuthContext();
     const emptyForm = {
         city: '', title: '', place: '', tags: ''
     }
@@ -27,7 +27,7 @@ const UpdatePostForm = ({post, handleClose})=>{
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        if(!user){
+        if(!userContext){
             console.log("unauthorised")
             return
         }
@@ -39,7 +39,7 @@ const UpdatePostForm = ({post, handleClose})=>{
             body: JSON.stringify(post),
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization' : `Bearer ${user.token}`
+                'Authorization' : `Bearer ${userContext.token}`
             }
         })
         const json = await response.json();

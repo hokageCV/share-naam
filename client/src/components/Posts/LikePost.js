@@ -10,10 +10,10 @@ import ThumbUpAltOutlinedIcon from '@mui/icons-material/ThumbUpAltOutlined';
 
 export default function LikePost({post}){
     const { postsDispatch } = usePostsContext();
-    const { user } = useAuthContext();
+    const { userContext } = useAuthContext();
 
     const handleLike = async (_id)=>{
-        if(!user){
+        if(!userContext){
             return
         }
 
@@ -21,7 +21,7 @@ export default function LikePost({post}){
             method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization' : `Bearer ${user.token}`
+                    'Authorization' : `Bearer ${userContext.token}`
                 }
         })
         const json = await response.json();
@@ -39,7 +39,7 @@ export default function LikePost({post}){
             color='secondary' 
             onClick={() => {handleLike(post._id)}}
         >
-            { (post.likes.find( (like)=> like === user.user._id)) ?
+            { (post.likes.find( (like)=> like === userContext.user._id)) ?
                 <><ThumbUpAltIcon fontSize='small'/> &nbsp; Liked &nbsp; {post.likes.length}</>
             :
                 <><ThumbUpAltOutlinedIcon fontSize='small' /> &nbsp; Like &nbsp; {post.likes.length}</>
