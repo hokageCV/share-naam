@@ -2,7 +2,6 @@
 Share your favourite food places.
 Get to know about your friends' favourite places.
 
----
 ### Made with
 - ReactJS
 - MaterialUI
@@ -12,7 +11,6 @@ Get to know about your friends' favourite places.
 
 <br>
 
----
 #### upcoming features/changes
 - pagination
 - improve styling
