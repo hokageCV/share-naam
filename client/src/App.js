@@ -6,7 +6,6 @@ import Navbar from './components/Navbar/Navbar';
 import Home from "./pages/Home";
 import Auth from './components/Auth/Auth';
 import PostDetails from './components/PostDetails/PostDetails';
-import { useAuthContext } from './hooks/useAuthContext';
 import Footer from './components/Footer/Footer';
 
 function App() {
@@ -16,6 +15,7 @@ function App() {
     <ThemeProvider theme={globalTheme} >
       <BrowserRouter>
         <div className="App">
+          
           <Navbar />
           <Routes>
             <Route path='/'
@@ -33,13 +33,8 @@ function App() {
             <Route path='/auth' 
               element={!localuser ? <Auth /> : <Navigate to='/posts' />}  
             />
-            {/* <Route path='/posts' 
-              element={user ? <Home /> : Navigate to='/auth'< />}
-            />
-            <Route path='/auth' 
-              element={!user ? <Auth /> : <Navigate to='/' />}  
-            /> */}
           </Routes>
+          
           <Footer />
         </div>
       </BrowserRouter> 

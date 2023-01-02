@@ -30,7 +30,7 @@ export default function LikePost({post}){
             console.log(json.error)
         }
         else{
-            postsDispatch({type: LIKE_POST, payload: json})
+            await postsDispatch({type: LIKE_POST, payload: json})
         }
     }
 

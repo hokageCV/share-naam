@@ -1,25 +1,25 @@
 import React, { useEffect } from 'react';
 import { Pagination, PaginationItem } from '@mui/material';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import { usePostsContext } from '../../hooks/usePostsContext';
 import { GET_POSTS } from '../../Constants/Constants';
 
-function useQuery() {
-    return new URLSearchParams(useLocation().search);
-}
-
-export default function Paginate(){
+export default function Paginate({page}){
     const { postsDispatch } = usePostsContext();
-    const query = useQuery();
-    const page = query.get('page') || 1;
-    const searchQuery = query.get('searchQuery');
 
-    useEffect(() => {
-        if(page){
-            postsDispatch({type: GET_POSTS})
+
+    useEffect(() => {    
+        const fetchPosts = async ()=>{
+            const response = await fetch(`/posts?page=${page}`);
+            const json = await response.json();
+            
+            if(response.ok){
+                postsDispatch({type: GET_POSTS, payload: json})
+            }
         }
-    }, [])
+        fetchPosts()
+    }, [page])
 
     return(
         <Pagination

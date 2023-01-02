@@ -2,8 +2,24 @@ import { Post } from "../models/postModel.js"
 import mongoose from 'mongoose';
 
 export const getPosts = async (req, res)=>{
-    const posts = await Post.find({}).sort({createdAt: -1});
-    res.json(posts)
+    const {page} = req.query;
+
+    try{
+        const LIMIT = 7;
+        //get starting index of every page
+        const startIndex = (Number(page) - 1) * LIMIT  // -1 because zero indexing 
+        const totalPosts = await Post.countDocuments({});
+
+
+        const posts = await Post.find({}).sort({createdAt: -1}).limit(LIMIT).skip(startIndex)
+        // sort({createdAt: -1}) : posts newest to oldest order me mile
+        // skip(startIndex) : previous pages again fetch na ho
+
+        res.json({ data: posts, currentPage: (Number(page)), totalPages: Math.ceil(totalPosts / LIMIT) })
+    }
+    catch(err){
+        return res.status(404).json({error: err.message})
+    }
 }
 
 export const createPost = async (req, res)=>{

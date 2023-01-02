@@ -6,30 +6,52 @@ export const PostsContext = createContext();
 const postReducer = (state, action) =>{
     switch(action.type){
         case GET_POSTS:
-            return { 
-                postsContext: action.payload 
+            return{ 
+                postsContext: {
+                    posts: action.payload.data, 
+                    currentPage: action.payload.currentPage, 
+                    totalPages: action.payload.totalPages 
+                } 
             }
         case CREATE_POST:
             return {
-                postsContext: [action.payload, ...state.postsContext]
+                postsContext: {
+                    ...state.postsContext,
+                    posts: [action.payload,  ...state.postsContext.posts],
+                }
             }
         case UPDATE_POST:
             return{
-                postsContext: state.postsContext.map((post)=> post._id === action.payload._id ? 
-                     action.payload 
-                    : post
-                )
+                postsContext: {
+                    ...state.postsContext,
+                    posts: 
+                        state.postsContext.posts.map( (post)=> post._id === action.payload._id ?
+                            action.payload
+                            : post 
+                        )
+                    ,
+                }
             }
         case DELETE_POST:
             return {
-                postsContext: state.postsContext.filter( (post)=>post._id !== action.payload._id )
+                postsContext: {
+                    ...state.postsContext,
+                    posts: 
+                        state.postsContext.posts.filter( (post)=>post._id !== action.payload._id )
+                    ,
+                }
             }
         case LIKE_POST:
             return {
-                postsContext: state.postsContext.map((post)=> post._id === action.payload._id ? 
-                     action.payload 
-                    : post
-                )
+                postsContext: {
+                    ...state.postsContext,
+                    posts: 
+                        state.postsContext.posts.map((post)=> post._id === action.payload._id ?
+                            action.payload
+                            : post 
+                        )
+                    ,
+                }
             }
         default: 
             return state
@@ -37,7 +59,7 @@ const postReducer = (state, action) =>{
 }
 
 export const PostContextProvider = ({children})=>{
-    const [state, dispatch] = useReducer(postReducer, {postsContext: []})
+    const [state, dispatch] = useReducer(postReducer, {postsContext: {}})
 
     return (
         <PostsContext.Provider value={{ ...state, postsDispatch: dispatch}}> 
