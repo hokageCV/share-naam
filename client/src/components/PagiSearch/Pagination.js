@@ -6,7 +6,8 @@ import { usePostsContext } from '../../hooks/usePostsContext';
 import { GET_POSTS } from '../../Constants/Constants';
 
 export default function Paginate({page}){
-    const { postsDispatch } = usePostsContext();
+    const { postsContext, postsDispatch } = usePostsContext();
+    const { totalPages } = postsContext;
 
 
     useEffect(() => {    
@@ -23,14 +24,14 @@ export default function Paginate({page}){
 
     return(
         <Pagination
-            count={5}
-            page={1}
+            count={totalPages}
+            page={Number(page) || 1}
             variant="outlined"
             color='primary'
             renderItem={(item)=>(
                 <PaginationItem 
                     {...item}
-                    component={Link}  to={`/posts?page=${1}`}
+                    component={Link}  to={`/posts?page=${item.page}`}
                 />
             )}
         />
