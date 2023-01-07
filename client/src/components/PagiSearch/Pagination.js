@@ -20,7 +20,7 @@ export default function Paginate({page}){
             }
         }
         fetchPosts()
-    }, [page])
+    }, [page, postsDispatch])
 
     return(
         <Pagination

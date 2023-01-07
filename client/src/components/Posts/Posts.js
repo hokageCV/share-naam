@@ -14,7 +14,7 @@ const Posts = ()=>{
                 <Grid container alignItems='center' spacing={3}>
                     {postsContext.posts.map( (post)=>{
                         return (
-                            <Grid item key={post._id} xs={10} sm={5} md={4} lg={3} >
+                            <Grid item key={post._id} xs={10} sm={5} md={4} lg={4} >
                                 <Post post={post} />
                             </Grid>
                         )

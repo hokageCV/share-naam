@@ -22,6 +22,13 @@ export const CardStyle = {
 
 export const CardContentStyle ={
   color: SECONDARY,
+  width: '85%',
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'flex-start',
+  alignItems: 'start',
+  // border: '5px solid black',
+
 }
 export const EditButtonStyle = {
   position: 'absolute',
