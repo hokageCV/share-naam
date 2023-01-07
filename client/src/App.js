@@ -9,7 +9,6 @@ import PostDetails from './components/PostDetails/PostDetails';
 import Footer from './components/Footer/Footer';
 
 function App() {
-  const localuser = localStorage.getItem('user');
   
   return (
     <ThemeProvider theme={globalTheme} >
@@ -19,21 +18,11 @@ function App() {
           <Box className='notForFooter' sx={{minHeight: 'calc(100vh - 51px)'}}>
             <Navbar />
             <Routes>
-              <Route path='/'
-                element={<Navigate to='/posts' />}
-              />
-              <Route path='/posts' 
-                element={<Home />}
-              />
-              <Route path='/posts/search' 
-                element={<Home />}
-              />
-              <Route path='/posts/:id' 
-                element={<PostDetails />}
-              />
-              <Route path='/auth' 
-                element={!localuser ? <Auth /> : <Navigate to='/posts' />}  
-              />
+              <Route path='/' element={<Navigate to='/posts' />} />
+              <Route path='/posts' element={<Home />} />
+              <Route path='/posts/search' element={<Home />} />
+              <Route path='/posts/:id' element={<PostDetails />} />
+              <Route path='/auth' element={<Auth /> }  />
             </Routes>
           </Box>
 

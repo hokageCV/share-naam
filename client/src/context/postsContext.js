@@ -1,5 +1,5 @@
 import {createContext, useReducer} from 'react';
-import {CREATE_POST, DELETE_POST, GET_POSTS, UPDATE_POST, LIKE_POST} from '../Constants/Constants';
+import {CREATE_POST, DELETE_POST, GET_POSTS, UPDATE_POST, LIKE_POST, GET_POST_BY_ID} from '../Constants/Constants';
 
 export const PostsContext = createContext();
 
@@ -12,6 +12,12 @@ const postReducer = (state, action) =>{
                     currentPage: action.payload.currentPage, 
                     totalPages: action.payload.totalPages 
                 } 
+            }
+        case GET_POST_BY_ID:
+            return{
+                postsContext: {
+                    post: action.payload.data
+                }
             }
         case CREATE_POST:
             return {
