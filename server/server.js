@@ -12,8 +12,8 @@ dotenv.config();
 
 
 // middleware
-app.use(bodyParser.json({ limit: "10mb", extended: true }));
-app.use(bodyParser.urlencoded({ limit: "10mb", extended: true }));
+app.use(bodyParser.json({ limit: "8mb", extended: true }));
+app.use(bodyParser.urlencoded({ limit: "8mb", extended: true }));
 app.use(cors());
 
 

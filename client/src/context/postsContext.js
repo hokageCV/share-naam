@@ -14,6 +14,7 @@ const postReducer = (state, action) =>{
                 } 
             }
         case GET_POST_BY_ID:
+            // console.log({action})
             return{
                 postsContext: {
                     post: action.payload.data

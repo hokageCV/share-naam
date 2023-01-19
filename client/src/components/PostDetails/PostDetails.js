@@ -8,6 +8,7 @@ import { GET_POST_BY_ID } from '../../Constants/Constants';
 export default function PostDetails(){
     const { postsContext, postsDispatch } = usePostsContext();
     const {id} = useParams();
+    const randomImageURL = 'https://source.unsplash.com/random/750x900/?forrest,mountain'
 
     useEffect(() => {
         const fetchPostByID = async ()=>{
@@ -31,7 +32,7 @@ export default function PostDetails(){
                 </Grid>
                 <Grid item sm={12} md={4} sx={{padding:1}}>       
                     <img 
-                        src="https://source.unsplash.com/random/750x900/?forrest,mountain" 
+                        src={(postsContext.post && postsContext.post.imgFile) || randomImageURL} 
                         loading="lazy"
                         alt="random"
                         width="100%"
