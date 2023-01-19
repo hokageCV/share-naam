@@ -35,7 +35,7 @@ export const getPost = async (req, res)=>{
 }
 
 export const createPost = async (req, res)=>{
-    const {title, place, city, tags, creatorID} = req.body;
+    const {title, place, city, tags, creatorID, imgFile} = req.body;
 
     let emptyFields = [];
     if(!title) emptyFields.push('title')
@@ -47,7 +47,7 @@ export const createPost = async (req, res)=>{
 
 
     try{
-        const post = await Post.create({title, place, city, tags, creatorID}); 
+        const post = await Post.create({title, place, city, tags, creatorID, imgFile}); 
         res.status(200).json(post)
     }
     catch(err){

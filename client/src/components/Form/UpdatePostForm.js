@@ -5,10 +5,13 @@ import { useAuthContext } from '../../hooks/useAuthContext';
 
 import { SURFACE, UPDATE_POST } from '../../Constants/Constants';
 
+import FileBase from 'react-file-base64';
+import styles from './style';
+
 const UpdatePostForm = ({post, handleClose})=>{
     const { userContext } = useAuthContext();
     const emptyForm = {
-        city: '', title: '', place: '', tags: ''
+        city: '', title: '', place: '', tags: '', imgFile: ''
     }
 
     const [formData, setFormData] = useState(emptyForm) 
@@ -71,6 +74,13 @@ const UpdatePostForm = ({post, handleClose})=>{
                     value={formData.tags} 
                     onChange={(e)=>setFormData({...formData, tags: e.target.value.split(',')})} 
                 />
+                <div className={styles.fileInput}>
+                    <FileBase 
+                        type="file"
+                        multiple={false}
+                        onDone={ ({base64})=>setFormData({...formData, imgFile: base64}) }
+                    />
+                </div>
 
                 <Button variant='contained' color='primary' size='medium' type='submit' sx={{m:1, width: '50%'}}>Submit</Button>
             </form>
