@@ -1,7 +1,7 @@
 import { SECONDARY, CARD_BG } from "../../Constants/Constants"
 
 const styles = {
-  BoxStyle : {
+  box : {
     position: 'absolute',
     top: '50%',
     left: '50%',
@@ -11,7 +11,7 @@ const styles = {
     border: '5px solid black',
   },
 
-  CardStyle : {
+  card : {
     backgroundColor: CARD_BG,
     display: 'flex',
     flexDirection: 'column',
@@ -21,10 +21,15 @@ const styles = {
     position: 'relative',
     boxShadow: "5px 6px 4px #b58500",
 
-    "&:hover":{ boxShadow: "8px 9px 7px #b58500", borderRadius: '20px' }
+    "&:hover":{ 
+      boxShadow: "8px 9px 7px #b58500", 
+      borderRadius: '20px' ,
+
+      transform: 'scale(1.05)',
+    }
   },
 
-  CardMediaStyle:{
+  cardMedia:{
     height: '240px',
     backgroundPosition: 'center center/cover',
 
@@ -35,29 +40,31 @@ const styles = {
     cursor: 'pointer'
   },
 
-  CardContentStyle :{
+  cardContent :{
     color: SECONDARY,
     width: '85%',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'flex-start',
     alignItems: 'start',
-    // border: '5px solid black',
-
   },
 
-  EditButtonStyle : {
+  editButton : {
     position: 'absolute',
     top: '5px',
     right: '5px',
     color: 'black',
   },
 
-  CardActionsStyle : {
+  cardActions : {
     padding: '0 16px 8px 16px',
     display: 'flex',
     justifyContent: 'space-between',
     color: SECONDARY
+  },
+
+  cardHeader:{
+    userSelect: 'none',
   }
 }
 export default styles;

@@ -78,7 +78,13 @@ const CreatePostForm = ({handleClose})=>{
                     />
                 </div>
 
-                <Button variant='contained' color='primary' size='medium' type='submit' sx={{m:1, width: '50%'}}>Submit</Button>
+                <Button 
+                    variant='contained' color='primary' 
+                    size='medium' type='submit' 
+                    sx={styles.button}
+                >
+                    Submit
+                </Button>
             </form>
         </Paper>
     )

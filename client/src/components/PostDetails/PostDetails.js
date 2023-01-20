@@ -3,6 +3,7 @@ import { Box, Typography, Grid } from "@mui/material";
 import { usePostsContext } from '../../hooks/usePostsContext';
 import { useParams } from 'react-router-dom'
 import { GET_POST_BY_ID } from '../../Constants/Constants';
+import styles from './style'
 
 
 export default function PostDetails(){
@@ -23,12 +24,12 @@ export default function PostDetails(){
     }, [])
 
     return(
-        <Box sx={{ margin:3, boxShadow: 3}}>
+        <Box sx={styles.outerBox}>
             <Grid container >
-                <Grid item sm={12} md={8} sx={{padding:1}}>             
-                    <Typography variant="h3" component="h2">Title: {postsContext.post && postsContext.post.title}</Typography>
-                    <Typography variant="h6" component="h2">Location: {postsContext.post && postsContext.post.place}</Typography>
-                    <Typography variant="body" component="h2">Place: {postsContext.post && postsContext.post.city}</Typography>
+                <Grid item sm={12} md={8} sx={styles.infoPart}>             
+                    <Typography variant="h3" component="h2" sx={styles.title}>Title: {postsContext.post && postsContext.post.title}</Typography>
+                    <Typography variant="h6" component="h2" sx={styles.capital}>Location: {postsContext.post && postsContext.post.place}</Typography>
+                    <Typography variant="body" component="h2" sx={styles.capital}>Place: {postsContext.post && postsContext.post.city}</Typography>
                 </Grid>
                 <Grid item sm={12} md={4} sx={{padding:1}}>       
                     <img 

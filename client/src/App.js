@@ -3,8 +3,8 @@ import {globalTheme} from './theme/globalTheme';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
 import Navbar from './components/Navbar/Navbar';
-import Home from "./pages/Home";
-import Auth from './components/Auth/Auth';
+import Home from "./pages/Home/Home";
+import Auth from './pages/Auth/Auth';
 import PostDetails from './components/PostDetails/PostDetails';
 import Footer from './components/Footer/Footer';
 

@@ -1,5 +1,9 @@
-import { PRIMARY } from "../../Constants/Constants";
+import { CARD_BG } from "../../Constants/Constants";
 
-export const SearchBarStyle = {
-    backgroundColor: PRIMARY,
+const styles = {
+    paginate: {
+        color: CARD_BG
+    }
 }
+
+export default styles;
