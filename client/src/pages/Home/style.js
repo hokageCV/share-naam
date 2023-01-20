@@ -1,4 +1,4 @@
-import { BACKGROUND } from "../Constants/Constants";
+import { BACKGROUND } from "../../Constants/Constants";
 
 export const PagiSearchContainerStyle = {
     backgroundColor: BACKGROUND,

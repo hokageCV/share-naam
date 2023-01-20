@@ -24,19 +24,21 @@ const Post = ({post})=>{
     const openPost = () => navigate(`/posts/${post._id}`, {replace: true})
 
     return(
-        <Card sx={styles.CardStyle} >
+        <Card sx={styles.card} >
 
             <CardHeader
                 title={post.title}
                 titleTypographyProps={{textTransform: 'capitalize', variant:'h5' }}
-
+                
                 subheader={ moment(post.createdAt).fromNow() }
                 subheaderTypographyProps={{variant:'caption'}}
+                
+                sx={styles.cardHeader}
 
                 action={
                     (userContext!==null && userContext!==undefined && userContext.user._id === post.creatorID) ?
                         <Button
-                            style={styles.EditButtonStyle}
+                            style={styles.editButton}
                             size='small'
                             onClick={()=>handleOpen()}
                             >
@@ -46,26 +48,26 @@ const Post = ({post})=>{
                 }
             />
 
-                <CardMedia 
-                    sx={styles.CardMediaStyle}
-                    image={post.imgFile  || dhokra}
-                    title={post.title}
-                    onClick={openPost}
-                />
-                <CardContent sx={styles.CardContentStyle}>
-                    
-                    <Typography variant="subtitle2" sx={{textTransform: 'capitalize'}} >
+            <CardMedia 
+                sx={styles.cardMedia}
+                image={post.imgFile  || dhokra}
+                title={post.title}
+                onClick={openPost}
+            />
+            <CardContent sx={styles.cardContent}>
+                
+                <Typography variant="subtitle2" sx={{textTransform: 'capitalize'}} >
                     <LocationOnOutlinedIcon fontSize='small'/> {post.place}
+                </Typography>
+                <Typography variant="body2" sx={{textTransform: 'capitalize'}} >
+                    {post.city}
+                </Typography>
+                <div>
+                    <Typography variant="caption" color='textSecondary' >
+                        {post.tags.map((tag)=>`#${tag} `)}
                     </Typography>
-                    <Typography variant="body2" sx={{textTransform: 'capitalize'}} >
-                        {post.city}
-                    </Typography>
-                    <div>
-                        <Typography variant="caption" color='textSecondary' >
-                            {post.tags.map((tag)=>`#${tag} `)}
-                        </Typography>
-                    </div>
-                </CardContent>
+                </div>
+            </CardContent>
 
             <Modal
                 open={open}
@@ -73,7 +75,7 @@ const Post = ({post})=>{
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
             >
-                <Box sx={styles.BoxStyle}>
+                <Box sx={styles.box}>
                     <UpdatePostForm 
                         post={post} 
                         handleClose={handleClose}
@@ -81,7 +83,7 @@ const Post = ({post})=>{
                 </Box>
             </Modal>
 
-            <CardActions sx={styles.CardActionsStyle} >
+            <CardActions sx={styles.cardActions} >
                 {userContext!==null && userContext!==undefined && <LikePost post={post} />}
                 {(userContext!==null && userContext!==undefined &&   userContext.user._id === post.creatorID) ?
                     <DeletePost post={post} />

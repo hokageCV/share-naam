@@ -2,8 +2,8 @@ import React from 'react';
 import { Grow, Container } from '@mui/material';
 import { useLocation } from 'react-router-dom'
 
-import Posts from '../components/Posts/Posts';
-import Paginate from '../components/PagiSearch/Pagination';
+import Posts from '../../components/Posts/Posts';
+import Paginate from '../../components/PagiSearch/Pagination';
 import { PagiSearchContainerStyle } from './style'
 
 // check which page we are currently on & what term we are searching

@@ -1,12 +1,11 @@
 import React, {useState} from 'react';
 import {AppBar, Box, Toolbar, Typography, Button, Modal, Container } from '@mui/material'
-import { AppBarStyle, BrandContainerStyle, FormBoxStyle, HeadingStyle, ToolbarStyle, ProfileStyle, LogoutBtnStyle } from './style';
 import { useNavigate } from "react-router-dom";
-import CreatePostForm from '../Form/CreatePostForm';
 import { useLogout } from '../../hooks/useLogout';
-
-import AddCircleOutlineTwoToneIcon from '@mui/icons-material/AddCircleOutlineTwoTone';
 import { useAuthContext } from '../../hooks/useAuthContext';
+import CreatePostForm from '../Form/CreatePostForm';
+import AddCircleOutlineTwoToneIcon from '@mui/icons-material/AddCircleOutlineTwoTone';
+import styles from './style';
 
 
 export default function Navbar() {
@@ -19,7 +18,7 @@ export default function Navbar() {
   const {userContext} = useAuthContext()
 
   return ( 
-      <AppBar sx={AppBarStyle}>
+      <AppBar sx={styles.appBar}>
 
         <Modal
             open={open}
@@ -27,20 +26,20 @@ export default function Navbar() {
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
           >
-            <Box sx={FormBoxStyle}>
+            <Box sx={styles.formBox}>
               <CreatePostForm handleClose={handleClose}/>
             </Box>
         </Modal>
 
-        <div sx={BrandContainerStyle}>
-          <Typography variant="h5" component="div" sx={HeadingStyle} >
-            Share Naam
+        <div sx={styles.brandContainer}>
+          <Typography variant="h5" component="div" sx={styles.heading} >
+            Share Naam 
           </Typography>
         </div>
         
-        <Toolbar sx={ToolbarStyle}>
+        <Toolbar sx={styles.toolbar}>
           {userContext ? (
-            <Container sx={ProfileStyle}>
+            <Container sx={styles.profile}>
               <Button 
                 color="secondary" 
                 variant="outlined"
@@ -51,14 +50,14 @@ export default function Navbar() {
                     Add
               </Button>
 
-              <Typography variant="h6" color='secondary' sx={{textTransform: 'capitalize'}}>
+              <Typography variant="h6" color='secondary' sx={styles.userName}>
                 {userContext.user.name}
               </Typography>
 
               <Button 
                 color="secondary" 
                 variant="outlined" 
-                sx={LogoutBtnStyle}
+                sx={styles.logoutBtn}
                 onClick={()=>logout()}
                 >Logout
               </Button>

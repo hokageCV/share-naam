@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 import { usePostsContext } from '../../hooks/usePostsContext';
 import { GET_POSTS } from '../../Constants/Constants';
+import styles from './style';
 
 export default function Paginate({page}){
     const { postsContext, postsDispatch } = usePostsContext();
@@ -25,9 +26,8 @@ export default function Paginate({page}){
     return(
         <Pagination
             count={totalPages}
-            page={Number(page) || 1}
-            variant="outlined"
-            color='primary'
+            page={Number(page) || 1} 
+            variant="contained"
             renderItem={(item)=>(
                 <PaginationItem 
                     {...item}

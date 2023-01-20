@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import { Avatar, Button, Paper, Grid, Typography, Container, TextField } from "@mui/material";
-import { AvatarStyle, ButtonStyle, FormStyle, PaperStyle, ErrorStyle } from "./style";
+import styles from "./style";
 
 import { useSignup } from "../../hooks/useSignup";
 import { useLogin } from "../../hooks/useLogin";
@@ -15,7 +15,7 @@ const initialState = {
 }; 
 
 export default function Auth(){
-    const [ isSignedup, setIsSignedup ] = useState(false);
+    const [ isSignedup, setIsSignedup ] = useState(true);
     const [ formData, setFormData ] = useState(initialState);
     const [ error, setError ] = useState(null);
 
@@ -28,10 +28,11 @@ export default function Auth(){
         
         if(!isSignedup){
             await signup(formData.firstName, formData.lastName, formData.email, formData.password)
-        }
+       }
         else{
             await login(formData.email, formData.password)
         }
+        
     }
 
     const clearForm = ()=> setFormData(initialState);
@@ -47,15 +48,15 @@ export default function Auth(){
 
     return(
         <Container  maxWidth="xs">
-            <Paper sx={PaperStyle} elevation={3}>
+            <Paper sx={styles.PaperStyle} elevation={3}>
 
-                <Avatar sx={AvatarStyle}>
+                <Avatar sx={styles.AvatarStyle}>
                     <LockOutlinedIcon />
                 </Avatar>
 
                 <Typography variant="h5" >{isSignedup ? 'Login' : 'Signup'}</Typography>
 
-                <form sx={FormStyle} onSubmit={handleSubmit}>
+                <form sx={styles.FormStyle} onSubmit={handleSubmit}>
                     <Grid container spacing={2}>
 
                         {/* ===== NON COMPONENT CODE ===== */}
@@ -109,24 +110,28 @@ export default function Auth(){
                         {/* ====== end of COMPONENT CODE ======  */}
 
                     </Grid>
-                    <Container sx={ErrorStyle}>
+                    <Container sx={styles.ErrorStyle}>
                         {signupError && <div>{signupError}</div>}
                         {loginError && <div>{loginError}</div>}
                         {error && <div>{error}</div>}
                     </Container>
 
-                    <Button type='submit' variant="contained" color="primary" fullWidth sx={ButtonStyle}>
-                        {isSignedup ? "Login" : "Signup"}
-                    </Button>
-
-
-                    <Grid container justify='flex-end'>
+                    <Grid container justifyContent="center">
+                        <Grid item>
+                            <Button
+                                type='submit' 
+                                variant="contained" color="primary" fullWidth sx={styles.button}
+                            >
+                                {isSignedup ? "Login" : "Signup"}
+                            </Button>
+                        </Grid>
                         <Grid item>
                             <Button onClick={toggleIsSignedup} >
                             { !isSignedup ? 'Already have an account? Login' : "Don't have an account? Sign Up" }
                             </Button>
                         </Grid>
                     </Grid>
+
                 </form>
 
             </Paper>
