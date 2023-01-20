@@ -9,6 +9,3 @@ Get to know about your friends' favourite places.
 - MongoDB
 - ExpressJS
 
-#### upcoming features/changes
-- improve styling
-- search with tags
