@@ -1,15 +1,14 @@
-import { GET_POSTS } from '../Constants/Constants';
-import {usePostsContext} from '../hooks/usePostsContext'
+import { GET_POSTS, SERVER_URL } from "../Constants/Constants";
+import { usePostsContext } from "../hooks/usePostsContext";
 
+export const useFetchPosts = async () => {
+    const { postsDispatch } = usePostsContext();
 
-export const useFetchPosts = async ()=>{
-    const {postsDispatch} = usePostsContext();
-
-    const response = await fetch('/posts');
+    const response = await fetch(`${SERVER_URL}/posts`);
     const json = await response.json();
-    
-    if(response.ok){
-        console.log(json)
-        postsDispatch({type: GET_POSTS, payload: json})
+
+    if (response.ok) {
+        console.log(json);
+        postsDispatch({ type: GET_POSTS, payload: json });
     }
-}
+};

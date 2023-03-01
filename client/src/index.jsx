@@ -6,8 +6,7 @@ import { PostContextProvider } from './context/postsContext';
 import { AuthContextProvider } from './context/AuthContext';
 
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
+ReactDOM.createRoot( document.getElementById('root') ).render(
   <React.StrictMode>
     <AuthContextProvider>
       <PostContextProvider >

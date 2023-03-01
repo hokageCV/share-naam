@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button } from '@mui/material';
-import { DELETE_POST } from '../../Constants/Constants';
+import { DELETE_POST, SERVER_URL } from '../../Constants/Constants';
 import { usePostsContext } from '../../hooks/usePostsContext';
 import { useAuthContext } from '../../hooks/useAuthContext';
 
@@ -17,7 +17,7 @@ export default function DeletePost({post}){
             return
         }
 
-        const response = await fetch(`/posts/${_id}`, {
+        const response = await fetch(`${SERVER_URL}/posts/${_id}`, {
             method: 'DELETE',
                 body: JSON.stringify(post),
                 headers: {

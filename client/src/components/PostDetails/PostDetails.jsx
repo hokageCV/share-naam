@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Box, Typography, Grid } from "@mui/material";
 import { usePostsContext } from '../../hooks/usePostsContext';
 import { useParams } from 'react-router-dom'
-import { GET_POST_BY_ID } from '../../Constants/Constants';
+import { GET_POST_BY_ID, SERVER_URL } from '../../Constants/Constants';
 import styles from './style'
 
 
@@ -13,7 +13,7 @@ export default function PostDetails(){
 
     useEffect(() => {
         const fetchPostByID = async ()=>{
-            const response = await fetch(`http://localhost:8080/posts/${id}`);
+            const response = await fetch(`${SERVER_URL}/posts/${id}`);
             const json = await response.json();
             
             if(response.ok){

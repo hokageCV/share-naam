@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button } from '@mui/material';
-import { LIKE_POST } from '../../Constants/Constants';
+import { LIKE_POST, SERVER_URL } from '../../Constants/Constants';
 import { usePostsContext } from '../../hooks/usePostsContext';
 import { useAuthContext } from '../../hooks/useAuthContext';
 
@@ -17,7 +17,7 @@ export default function LikePost({post}){
             return
         }
 
-        const response = await fetch(`/posts/${_id}/likePost`, {
+        const response = await fetch(`${SERVER_URL}/posts/${_id}/likePost`, {
             method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',

@@ -3,7 +3,7 @@ import { Pagination, PaginationItem } from '@mui/material';
 import { Link } from 'react-router-dom';
 
 import { usePostsContext } from '../../hooks/usePostsContext';
-import { GET_POSTS } from '../../Constants/Constants';
+import { SERVER_URL, GET_POSTS } from '../../Constants/Constants';
 import styles from './style';
 
 export default function Paginate({page}){
@@ -13,7 +13,7 @@ export default function Paginate({page}){
 
     useEffect(() => {    
         const fetchPosts = async ()=>{
-            const response = await fetch(`/posts?page=${page}`);
+            const response = await fetch(`${SERVER_URL}/posts?page=${page}`);
             const json = await response.json();
             
             if(response.ok){

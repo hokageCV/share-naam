@@ -1,26 +1,21 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import {Typography, TextField, Paper, Button} from '@mui/material';
 import { usePostsContext } from '../../hooks/usePostsContext';
 import { useAuthContext } from '../../hooks/useAuthContext';
-
-import { SURFACE, UPDATE_POST } from '../../Constants/Constants';
-
+import { CREATE_POST, SURFACE, SERVER_URL } from '../../Constants/Constants';
 import FileBase from 'react-file-base64';
 import styles from './style';
 
-const UpdatePostForm = ({post, handleClose})=>{
+const CreatePostForm = ({handleClose})=>{
     const { userContext } = useAuthContext();
+    const creatorID = userContext.user._id ;
     const emptyForm = {
         city: '', title: '', place: '', tags: '', imgFile: ''
     }
 
     const [formData, setFormData] = useState(emptyForm) 
     const [error, setError] = useState(null);
-    const {postsDispatch} = usePostsContext();
-
-    useEffect(() => {
-        setFormData(post)
-    }, [post])
+    const { postsDispatch } = usePostsContext();
 
     const clear = ()=>{
         setFormData(emptyForm)
@@ -35,12 +30,12 @@ const UpdatePostForm = ({post, handleClose})=>{
             return
         }
 
-        const post = {...formData};
-
-        const response = await fetch(`/posts/${post._id}/editPost`, {
-            method: 'PATCH',
+        const post = {...formData, creatorID};
+        
+        const response = await fetch(`${SERVER_URL}/posts`, {
+            method: 'POST',
             body: JSON.stringify(post),
-            headers: {
+            headers:{
                 'Content-Type': 'application/json',
                 'Authorization' : `Bearer ${userContext.token}`
             }
@@ -51,19 +46,20 @@ const UpdatePostForm = ({post, handleClose})=>{
         if(!response.ok){
             setError(json.error)
         }
-        else{
+
+        if(response.ok){
             setError(null)
-            console.log( "post updated   ", json );
-            postsDispatch({type: UPDATE_POST, payload: json})
-        } 
+            console.log( "new post added   ", json );
+            postsDispatch({type: CREATE_POST, payload: json})
+        }
         clear()
         handleClose()
     }
     
     return(
         <Paper style={{backgroundColor: SURFACE}}>
-            <form autoComplete='off' noValidate onSubmit={handleSubmit}>
-                <Typography variant="h6" color="secondary"> &nbsp; Edit</Typography>
+            <form autoComplete='off' noValidate onSubmit={handleSubmit} sx={{px:'5px'}}>
+                <Typography variant="h6" color="secondary"> &nbsp; Share</Typography>
 
                 <TextField  name="title" variant='outlined' label='title' fullWidth value={formData.title} onChange={(e)=>setFormData({...formData, title: e.target.value})} />
                 <TextField  name="place" variant='outlined' label='place' fullWidth value={formData.place} onChange={(e)=>setFormData({...formData, place: e.target.value})} />
@@ -94,4 +90,4 @@ const UpdatePostForm = ({post, handleClose})=>{
     )
 }
 
-export default UpdatePostForm;
+export default CreatePostForm;
