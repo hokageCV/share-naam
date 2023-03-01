@@ -22,7 +22,7 @@ export function useLogin() {
 
         if (!response.ok) {
             setLoginIsLoading(false);
-            setLoginError(json.error);
+            setLoginError(json.message);
         }
         if (response.ok) {
             // save user(user's token) to local storage

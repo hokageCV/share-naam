@@ -22,7 +22,7 @@ export function useSignup() {
 
         if (!response.ok) {
             setSignupIsLoading(false);
-            setSignupError(json.error);
+            setSignupError(json.message);
         }
         if (response.ok) {
             // save user(user's token) to local storage

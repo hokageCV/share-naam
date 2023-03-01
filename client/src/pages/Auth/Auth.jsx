@@ -24,7 +24,6 @@ export default function Auth(){
 
     const handleSubmit = async (e) =>{
         e.preventDefault()
-        console.log("formData from handleSubmit in auth.js :  ", formData );
         
         if(!isSignedup){
             await signup(formData.firstName, formData.lastName, formData.email, formData.password)
@@ -110,10 +109,10 @@ export default function Auth(){
                         {/* ====== end of COMPONENT CODE ======  */}
 
                     </Grid>
-                    <Container sx={styles.ErrorStyle}>
-                        {signupError && <div>{signupError}</div>}
-                        {loginError && <div>{loginError}</div>}
-                        {error && <div>{error}</div>}
+                    <Container>
+                        <div sx={styles.ErrorStyle}>{signupError}</div>
+                        <div sx={styles.ErrorStyle}>{loginError}</div>
+                        <div sx={styles.ErrorStyle}>{error}</div>
                     </Container>
 
                     <Grid container justifyContent="center">
