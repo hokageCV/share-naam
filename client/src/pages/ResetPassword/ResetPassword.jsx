@@ -25,9 +25,7 @@ export default function ResetPassword() {
     if (formData.password !== formData.confirmPassword) {
       setError("Passwords do not match");
     } else {
-      console.log("🚀 initiaitng reset hook");
       await reset(formData.password, token);
-      console.log("🚀 reset hook complete");
     }
   };
 

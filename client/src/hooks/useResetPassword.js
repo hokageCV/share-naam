@@ -16,16 +16,8 @@ export function useResetPassword() {
                 encodedResetToken: resetToken,
             }),
         });
-        console.log(
-            "🚀 ⚡ file: useResetPassword.js:12 ⚡ reset ⚡ response:",
-            response
-        );
 
         const json = await response.json();
-        console.log(
-            "🚀 ⚡ file: useResetPassword.js:20 ⚡ reset ⚡ json:",
-            json
-        );
 
         if (!response.ok) {
             setError(json.message);

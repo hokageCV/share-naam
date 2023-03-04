@@ -4,7 +4,6 @@ import { SERVER_URL } from "../../Constants/Constants";
 
 export default function ForgotPassword({ email, setError }) {
   const handleClick = async () => {
-    console.log("Forgot Password clicked");
     const response = await fetch(`${SERVER_URL}/user/forgot-password`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },

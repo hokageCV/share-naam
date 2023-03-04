@@ -92,16 +92,8 @@ export const forgotPassword = async (req, res) => {
         const resetToken = jwt.sign({ _id: user._id }, process.env.SECRET_STRING, {
             expiresIn: "30m",
         });
-        console.log(
-            "🚀 ⚡ file: userControllers.js:95 ⚡ forgotPassword ⚡ resetToken:",
-            resetToken
-        );
 
         const encodedResetToken = encodeURIComponent(resetToken.replace(/\./g, "%2E"));
-        console.log(
-            "🚀 ⚡ file: userControllers.js:98 ⚡ forgotPassword ⚡ encodedResetToken:",
-            encodedResetToken
-        );
 
         user.resetPasswordToken = resetToken;
         user.resetPasswordTokenExpiresIn = Date.now() + 3600000;
@@ -139,24 +131,12 @@ export const forgotPassword = async (req, res) => {
 
 export const resetPassword = async (req, res) => {
     const { newPassword, encodedResetToken } = req.body;
-    console.log(
-        "🚀 ⚡ file: userControllers.js:138 ⚡ resetPassword ⚡ encodedResetToken:",
-        encodedResetToken
-    );
 
     if (encodedResetToken) {
         try {
             const decodedToken = decodeURIComponent(encodedResetToken.replace(/%2E/g, "."));
-            console.log(
-                "🚀 ⚡ file: userControllers.js:144 ⚡ resetPassword ⚡ decodedToken:",
-                decodedToken
-            );
 
             const decodedData = jwt.verify(decodedToken, process.env.SECRET_STRING);
-            console.log(
-                "🚀 ⚡ file: userControllers.js:148 ⚡ resetPassword ⚡ decodedData:",
-                decodedData
-            );
 
             const user = await UserModel.findOne({
                 _id: decodedData._id,
